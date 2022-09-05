@@ -65,15 +65,14 @@ public class BasicController {
         }
     }
 
-
     @GetMapping("date")
-    public String date(Model model){
+    public String date(Model model) {
         model.addAttribute("localDateTime", LocalDateTime.now());
         return "basic/date";
     }
 
     @GetMapping("link")
-    public String link(Model model){
+    public String link(Model model) {
         model.addAttribute("param1", "data1");
         model.addAttribute("param2", "data2");
 
@@ -81,22 +80,37 @@ public class BasicController {
     }
 
     @GetMapping("literal")
-    public String literal(Model model){
+    public String literal(Model model) {
         model.addAttribute("data", "spring!");
         return "basic/literal";
     }
 
     @GetMapping("/operation")
-    public String operation(Model model){
+    public String operation(Model model) {
         model.addAttribute("nullData", null);
-        model.addAttribute("data","Sring!");
+        model.addAttribute("data", "Sring!");
 
         return "basic/operation";
     }
 
     @GetMapping("/attribute")
-    public String attribute(){
+    public String attribute() {
         return "basic/attribute";
+    }
+
+    @GetMapping("each")
+    public String each(Model model) {
+        addUsers(model);
+        return "basic/each";
+    }
+
+    private void addUsers(Model model) {
+        List<User> list = new ArrayList<>();
+        list.add(new User("userA", 10));
+        list.add(new User("userB", 20));
+        list.add(new User("userC", 30));
+
+        model.addAttribute("users",list);
     }
 
     @Data
